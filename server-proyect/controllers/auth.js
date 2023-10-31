@@ -64,8 +64,7 @@ const activate = async (req, res) => {
     try {
         const { id } = req.params;
         const userFind = await usermodel.findById(id);
-
-        userFind.status = true;
+        userFind.active = true;
         userStore = await userFind.save();
 
 
@@ -92,7 +91,9 @@ const login = async (req, res) => {
         if (!userStore) {
             throw new Error("el usuario no existe")
         }
-
+        if(!userStore.active){
+            throw new Error("El usuario no esta verificado")
+        }
         const check = await bcrypt.compare(
             current_password,
             userStore.current_password

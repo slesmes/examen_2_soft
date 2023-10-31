@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Button, TextField, Typography, Checkbox, Modal} from '@mui/material';
+import { Box, Button, TextField, Typography, Checkbox, Modal } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 export const User = () => {
@@ -26,12 +26,15 @@ export const User = () => {
             [name]: value,
         });
     }
-    
+
     const urlPostUser = "http://localhost:3100/api/v1/auth/signin"
     const handleSubmit = (e) => {
         setFormData(true)
         e.preventDefault();
         console.log(formData)
+        if (formData.current_password !== formData.password2) {
+            return
+        } else {
             fetch(urlPostUser, {
                 method: 'POST',
                 headers: {
@@ -47,7 +50,7 @@ export const User = () => {
                 .catch((error) => {
                     console.error('Error al crear el post:', error);
                 });
-        
+        }
     }
 
     const handlePolicyModalOpen = () => {
@@ -76,7 +79,7 @@ export const User = () => {
                         variant="outlined"
                         fullWidth
                         margin="normal"
-                        value= {formData.firstname}
+                        value={formData.firstname}
                         onChange={handleInputChange}
                     />
                     <TextField
@@ -85,7 +88,7 @@ export const User = () => {
                         variant="outlined"
                         fullWidth
                         margin="normal"
-                        value = {formData.lastName}
+                        value={formData.lastName}
                         onChange={handleInputChange}
                     />
                     <TextField
@@ -95,7 +98,7 @@ export const User = () => {
                         variant="outlined"
                         fullWidth
                         margin="normal"
-                        value = {formData.email}
+                        value={formData.email}
                         onChange={handleInputChange}
                     />
                     <TextField
@@ -104,7 +107,7 @@ export const User = () => {
                         variant="outlined"
                         fullWidth
                         margin="normal"
-                        value = {formData.phone}
+                        value={formData.phone}
                         onChange={handleInputChange}
                     />
                     <TextField
@@ -114,7 +117,7 @@ export const User = () => {
                         variant="outlined"
                         fullWidth
                         margin="normal"
-                        value = {formData.current_password}
+                        value={formData.current_password}
                         onChange={handleInputChange}
                     />
                     <TextField

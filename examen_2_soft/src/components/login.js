@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import { Box, Button, TextField, Typography } from '@mui/material';
 
 export const Login = () => {
     const [formData, setFormData] = useState({
         email: '',
-        password: '',
+        current_pasword: '',
     });
+
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -14,36 +16,63 @@ export const Login = () => {
         });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+
+        const response = await fetch('http://localhost:3100/api/v1/auth/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData),
+        });
+        if (response.ok) {
+            window.location.href = 'http://localhost:3000/principal'
+        } else {
+            const errorData = await response.json();
+            console.log('Error de autenticación:', errorData);
+        }
     };
 
     return (
-        <div>
-            <h2>Iniciar Sesión</h2>
+        <Box p={3}>
+            <Typography variant="h4" align="center" gutterBottom>
+                Iniciar Sesión
+            </Typography>
             <form onSubmit={handleSubmit}>
-                <div>
-                    <label>Email:</label>
-                    <input
-                        type="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleInputChange}
-                    />
-                </div>
-                <div>
-                    <label>Contraseña:</label>
-                    <input
-                        type="password"
-                        name="password"
-                        value={formData.password}
-                        onChange={handleInputChange}
-                    />
-                </div>
-                <button type="submit">Iniciar Sesión</button>
+                <TextField
+                    name="email"
+                    label="Email"
+                    type="email"
+                    variant="outlined"
+                    fullWidth
+                    margin="normal"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                />
+                <TextField
+                    name="current_pasword"
+                    label="Contraseña"
+                    type="password"
+                    variant="outlined"
+                    fullWidth
+                    margin="normal"
+                    value={formData.current_pasword}
+                    onChange={handleInputChange}
+                />
+                <Button
+                    type="submit"
+                    variant="contained"
+                    color="primary"
+                    fullWidth
+                    style={{ marginTop: '1rem' }}
+                >
+                    Iniciar Sesión
+                </Button>
             </form>
-        </div>
+        </Box>
     );
-}
+};
 
 export default Login;
+
