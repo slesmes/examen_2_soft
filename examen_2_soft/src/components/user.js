@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Button, TextField, Typography, Checkbox, Modal } from '@mui/material';
+import { Box, Button, TextField, Typography, Checkbox, Modal, Link } from '@mui/material';
 
 export const User = () => {
 
@@ -59,6 +59,11 @@ export const User = () => {
 
     return (
         <div>
+            <Box display="flex" justifyContent="space-between" p={3}>
+                <Typography variant="h6">
+                    <Link to="/login">Login</Link>
+                </Typography>
+            </Box>
             <Box p={3}>
                 <Typography variant="h4" align="center" gutterBottom>
                     Registrarse
