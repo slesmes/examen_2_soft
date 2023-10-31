@@ -16,6 +16,14 @@ email: {
 current_password: {
     type: String,
     require: true,
+},
+phone: {
+    type: String,
+    require: true
+},
+active:{
+    type: Boolean,
+    default: false,
 }
 })
 

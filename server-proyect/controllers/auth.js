@@ -25,6 +25,7 @@ const signin = async (req, res) => {
             lastname,
             email: emailLowerCase,
             current_password: current_password_hash,
+            phone: "3117752691",
         });
         const userStorage = await newUser.save()
         res.status(201).json(userStorage);
