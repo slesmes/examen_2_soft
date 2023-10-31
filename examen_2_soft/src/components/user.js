@@ -1,13 +1,18 @@
-import React, { useState } from 'react';
-import { Box, Button, Paper, TextField, Typography, Checkbox, Modal } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import { Box, Button, TextField, Typography, Checkbox, Modal } from '@mui/material';
 
 export const User = () => {
+
+    useEffect(() => {
+
+    }, []);
+
     const [formData, setFormData] = useState({
-        name: '',
+        firstname: '',
         lastName: '',
         email: '',
         phone: '',
-        password: '',
+        current_password: '',
         password2: '',
     });
 
@@ -20,11 +25,28 @@ export const User = () => {
             [name]: value,
         });
     }
+    
+    const urlPostUser = "http://localhost:3100/api/v1/auth/signin"
+    const handleSubmit = (e) => {
+        setFormData(true)
+        e.preventDefault();
+        console.log(formData)
+            fetch(urlPostUser, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log('Post creado:', data);
 
-    const handleSubmit = () => {
-        // Puedes agregar la lógica de envío del formulario aquí
-        // formData contiene la entrada del usuario
-        console.log(formData);
+                })
+                .catch((error) => {
+                    console.error('Error al crear el post:', error);
+                });
+        
     }
 
     const handlePolicyModalOpen = () => {
@@ -43,11 +65,12 @@ export const User = () => {
                 </Typography>
                 <form>
                     <TextField
-                        name="name"
+                        name="firstname"
                         label="Nombre"
                         variant="outlined"
                         fullWidth
                         margin="normal"
+                        value= {formData.firstname}
                         onChange={handleInputChange}
                     />
                     <TextField
@@ -56,6 +79,7 @@ export const User = () => {
                         variant="outlined"
                         fullWidth
                         margin="normal"
+                        value = {formData.lastName}
                         onChange={handleInputChange}
                     />
                     <TextField
@@ -65,6 +89,7 @@ export const User = () => {
                         variant="outlined"
                         fullWidth
                         margin="normal"
+                        value = {formData.email}
                         onChange={handleInputChange}
                     />
                     <TextField
@@ -73,15 +98,17 @@ export const User = () => {
                         variant="outlined"
                         fullWidth
                         margin="normal"
+                        value = {formData.phone}
                         onChange={handleInputChange}
                     />
                     <TextField
-                        name="password"
+                        name="current_password"
                         label="Contraseña"
                         type="password"
                         variant="outlined"
                         fullWidth
                         margin="normal"
+                        value = {formData.current_password}
                         onChange={handleInputChange}
                     />
                     <TextField
@@ -91,6 +118,7 @@ export const User = () => {
                         variant="outlined"
                         fullWidth
                         margin="normal"
+                        value={formData.password2}
                         onChange={handleInputChange}
                     />
                     <label>

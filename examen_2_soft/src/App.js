@@ -1,5 +1,3 @@
-import { Button } from '@mui/material'
-import React, { useState } from 'react'
 import { User } from './components/user'
 
 const  App = () => {
