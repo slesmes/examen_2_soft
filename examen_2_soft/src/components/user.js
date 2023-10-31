@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Button, TextField, Typography, Checkbox, Modal, Link } from '@mui/material';
+import { Box, Button, TextField, Typography, Checkbox, Modal} from '@mui/material';
+import { Link } from 'react-router-dom';
 
 export const User = () => {
 
