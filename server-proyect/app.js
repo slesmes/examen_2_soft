@@ -3,7 +3,6 @@ const express = require("express");
 /* especificar los middleware a utilizar */
 const app = express();
 const userRoutes = require("./routes/user");
-const serviceRoutes = require("./routes/service");
 const authRoutes = require("./routes/auth");
 const API_VERSION = 'api/v1'
 /* acceder a la configuracion del archivo */
@@ -13,7 +12,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended:true}));
 // http://localhost:3100/api/v1/user/new-user
 app.use(`/${API_VERSION}/users`, userRoutes)
-app.use(`/${API_VERSION}/services`, serviceRoutes)
 app.use(`/${API_VERSION}/auth`, authRoutes)
 
 module.exports = app;

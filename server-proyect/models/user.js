@@ -16,21 +16,6 @@ email: {
 current_password: {
     type: String,
     require: true,
-},
-avatar: {
-    type: String,
-},
-create_at:{
-    type: Date,
-    default: Date.now,
-},
-role: {
-    type: String,
-    default: "user",
-},
-active:{
-    type: Boolean,
-    default: true,
 }
 })
 

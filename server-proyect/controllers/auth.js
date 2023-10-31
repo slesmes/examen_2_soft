@@ -72,7 +72,7 @@ const login = async (req, res) => {
 
 const getMe = async(req,res) => {
     try{
-        const {id} = req.params;
+        const {id} = req.user._doc;
         const userfind = await usermodel.findById(id);
         console.log(userfind);
         //obtener token del usuario
